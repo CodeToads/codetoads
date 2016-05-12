@@ -169,7 +169,22 @@ module.exports.submitAttempt = function(req, res) {
 };
 
 module.exports.joinGame = function(req, res) {
-
+  var player = {
+    user_id: req.body.user_id,
+    progress: 0,
+    prompt: '',
+    code: ''
+  }
+  Game.filter({roomname: req.body.roomname}).run()
+  .then(function (games) {
+    var game = games[0];
+    if(game) {
+      game.players.push(player);
+      res.send(game);
+    } else {
+      res.send('The game does not exist!');
+    }
+  });
 };
 
 module.exports.createGame = function(req, res) {
