@@ -1,4 +1,4 @@
-import { CREATE_DIFFICULTY, CREATE_GAME, SET_CREATE, SET_JOIN, SET_ROOM } from '../actions/actions';
+import { CREATE_DIFFICULTY, CREATE_GAME, SET_CREATE, SET_JOIN, SET_ROOM, JOIN_GAME } from '../actions/actions';
 
 const INIT_STATE = {amount: 2, difficulty: 'easy', roomname: '', password: '', create: false, join: false};
 
@@ -48,7 +48,17 @@ export default function (state = INIT_STATE, action){
         password: action.payload.password,
         create: state.create,
         join: state.join
-      };
+      }
+      case JOIN_GAME:
+        console.log(action.payload);
+        return {
+          amount: state.amount,
+          difficulty: action.payload.difficulty,
+          roomname: action.payload.roomname,
+          password: action.payload.password,
+          create: state.create,
+          join: state.join
+        };
     default:
     return state;
   }
