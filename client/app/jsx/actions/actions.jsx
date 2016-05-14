@@ -66,7 +66,7 @@ export function setJoin() {
 }
 export function joinGame(roomname, password) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
-  const request = axios.post('/api/joinGame', {'roomname': roomname, 'password': password});
+  const request = axios.post('/api/joinGame', {'roomname': roomname, 'password': password, 'user_id':JSON.parse(localStorage.profile).user_id});
   return {
     type: JOIN_GAME,
     payload: request

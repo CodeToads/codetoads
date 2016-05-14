@@ -8,36 +8,37 @@ const {createGame, joinGame, createDifficulty, setJoin, setCreate, setRoom } = r
 class Multigame extends React.Component {
   constructor (){
     super()
-    
+
     this.state = {
       roomname: '',
       password: ''
     };
   }
-    
+
   _onRoomChange (event) {
     this.setState({
       roomname: event.target.value
     })
   }
-  
+
   _onPasswordChange (event) {
     this.setState({
       password: event.target.value
     })
   }
-  
+
   _handleSubmit () {
     if (this.props.join){
       this.props.setRoom(this.state.roomname, this.state.password);
-      hashHistory.push('/multiplay/' + this.state.roomname)
+      // this.props.joinGame(this.state.roomname, this.state.password);
+      hashHistory.push('/multiplay/' + this.state.roomname);
     } else if (this.props.create){
       this.props.setRoom(this.state.roomname, this.state.password);
       // this.props.createGame(this.state.roomname, this.state.password, this.props.difficulty);
       hashHistory.push('/multiplay/' + this.state.roomname);
     }
   }
-  
+
   render(){
     return (
       <div>
@@ -81,4 +82,4 @@ function mapStateToProps(state) {
           };
 }
 
-module.exports = connect(mapStateToProps, {createGame, createDifficulty, setJoin, setCreate, setRoom})(Multigame);
+module.exports = connect(mapStateToProps, {createGame, createDifficulty, setJoin, setCreate, setRoom, joinGame})(Multigame);
